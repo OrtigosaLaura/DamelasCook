@@ -4,3 +4,9 @@ git config --global user.name lauraortigosa378@gmail.com
 dotnet new mvc -o DamelasCook
 dotnet new sln --name DamelasCook
 dotnet sln add DamelasCook\DamelasCook.csproj
+
+Criar migrações
+dotnet ef migrations add criar-banco
+
+Executar migração e alterar o banco de dados
+dotnet ef database update
