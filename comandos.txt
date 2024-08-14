@@ -1,5 +1,5 @@
 git config --global user.name OrtigosaLaura
-git config --global user.name lauraortigosa378@gmail.com
+git config --global user.email lauraortigosa378@gmail.com
 
 dotnet new mvc -o DamelasCook
 dotnet new sln --name DamelasCook
