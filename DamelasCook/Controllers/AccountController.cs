@@ -1,17 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
+using DamelasCook.ViewModels;
+using DamelasCook.Services;
 
 namespace DamelasCook.Controllers;
 
     public class AccountController : Controller
     {
         private readonly ILogger<AccountController> _logger;
+        private readonly IUsuarioService _usuarioService;
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(
+            ILogger<AccountController> logger,
+            IUsuarioService usuarioService
+            )
         {
+            //Url.Action
             _logger = logger;
+            _usuarioService = usuarioService;
+            
         }
+        [HttpGet]
 
-        public IActionResult Index()
+        public IActionResult Login( string returnUrl)
         {
             return View();
         }

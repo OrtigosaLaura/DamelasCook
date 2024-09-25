@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace DamelasCook.Controllers;
 
-    public class AdminController : Controller
+[Authorize(Roles = "AdminControllers")]
+public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;
 
