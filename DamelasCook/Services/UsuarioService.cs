@@ -1,17 +1,14 @@
-using System.Data;
-using System.Linq.Expressions;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using DamelasCook.Data;
+using DamelasCook.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using DamelasCook.Helpers;
+using DamelasCook.Models;
+using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
-using DamelasCook.Data;
-using DamelasCook.Models;
-using DamelasCook.ViewModels;
 using GCook.Helpers;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration.KeyPerFile;
 
 namespace DamelasCook.Services;
 
@@ -24,7 +21,7 @@ namespace DamelasCook.Services;
     private readonly IUserStore<IdentityUser> _userStore;
     private readonly IUserEmailStore<IdentityUser> _emailStore;
     private readonly IWebHostEnvironment _hostEnvironment;
-    private readonly EmailSender _emailSender;
+    private readonly IEmailSender _emailSender;
     private readonly ILogger<UsuarioService> _logger;
 
     public UsuarioService(
@@ -52,7 +49,8 @@ namespace DamelasCook.Services;
             _logger = logger;
         }
 
-        public async Task<bool> ConfirmarEmail(string userId, string code) {
+        public async Task<bool> ConfirmarEmail(string userId, string code) 
+        {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
@@ -72,9 +70,10 @@ namespace DamelasCook.Services;
             }
             var userAccount = await _userManager.FindByIdAsync(userId);
             var usuario = await _contexto.Usuarios.Where(u => u.UsuarioId == userId).SingleOrDefaultAsync();
-            var perfil = string.Join(",", await _userManager.GetRolesAsync(userAccount));
+            var perfis = string.Join(",", await _userManager.GetRolesAsync(userAccount));
             var admin = await _userManager.IsInRoleAsync(userAccount, "Administrador");
-            UsuarioVM usuarioVM = new() {
+            UsuarioVM usuarioVM = new() 
+            {
                 UsuarioId = userId,
                 Nome = usuario.Nome,
                 DataNascimento = usuario.DataNascimento,
@@ -86,7 +85,7 @@ namespace DamelasCook.Services;
             };
             return usuarioVM;
         }
-        public async Task<SingleInResult> LoginUsuario(LoginVM login)
+        public async Task<SignInResult> LoginUsuario(LoginVM login)
         {
             string UserName = login.Email;
             if (Helper.IsValidEmail(login.Email))
@@ -112,7 +111,7 @@ namespace DamelasCook.Services;
             await _singInManager.SignOutAsync();
         }
 
-        public async Task<List<string>> RegistrarUsuario(RegistroVM registro, IdentityUser user)
+        public async Task<List<string>> RegistrarUsuario(RegistroVM registro)
         {
             var user = Activator.CreateInstance<IdentityUser>();
 
@@ -137,7 +136,7 @@ namespace DamelasCook.Services;
                 Usuario usuario = new()
                 {
                     UsuarioId = userId,
-                    DataNascimento = registro.DataNascimento ?? DataSetDateTime.Now,
+                    DataNascimento = registro.DataNascimento ?? DateTime.Now,
                     Nome = registro.Nome
                 };
                 if (registro.Foto != null)
@@ -430,12 +429,4 @@ namespace DamelasCook.Services;
         return email;
     }
 
-    Task<SignInResult> IUsuarioService.LoginUsuario(LoginVM login)
-    {
-        throw new NotImplementedException();
     }
-}
-
-public class SingleInResult
-{
-}
