@@ -20,7 +20,7 @@ namespace DamelasCook.Models;
         [ForeignKey("UsuarioId")]
         public Usuario Usuario { get; set; }
 
-        public DateTime DataComentario { get; set; }
+        public DateTime DataComentario { get; set; } = DataTime.Now;
 
         [StringLength(300)]
         public string TextoComentario { get; set; }

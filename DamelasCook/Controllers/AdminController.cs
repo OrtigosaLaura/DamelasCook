@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DamelasCook.Controllers;
 
-[Authorize(Roles = "AdminControllers")]
+[Authorize(Roles = "Administrador")]
 public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;

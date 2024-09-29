@@ -5,7 +5,7 @@ namespace DamelasCook.Services;
 
     public class EmailSender : IEmailSender
     {
-        public async Task SendEmailAsync(string EmailAddress, string subject, string htmlMessage)
+        public async Task SendEmailAsync(string emailAddress, string subject, string htmlMessage)
         {
             var mail = "gcook.app@outlook.com";
             var pw = "QV3E4khpZBEcL7K";
@@ -18,7 +18,7 @@ namespace DamelasCook.Services;
             
             MailMessage sendMail = new( 
                 from: mail,
-                to: EmailAddress,
+                to: emailAddress,
                 subject,
                 htmlMessage
             );

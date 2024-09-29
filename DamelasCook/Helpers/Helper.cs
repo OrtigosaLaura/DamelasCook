@@ -1,6 +1,6 @@
 using System.Net.Mail;
 
-namespace GCook.Helpers;
+namespace DamelasCook.Helpers;
 
 public static class Helper
 {

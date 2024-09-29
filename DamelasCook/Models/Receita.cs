@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.SignalR;
+
 
 namespace DamelasCook.Models;
 [Table("Receita")]
@@ -23,7 +23,7 @@ namespace DamelasCook.Models;
 
         public string TempoPreparo { get; set; }
 
-        public int Rendimento { get; set;}
+        public int Rendimento { get; set;} = 1;
 
         public Dificuldade Dificuldade { get; set; }
 
