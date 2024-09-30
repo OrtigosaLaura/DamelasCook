@@ -28,6 +28,7 @@ public class HomeController : Controller
             Receitas = _context.Receitas
             .Include(r => r.Categoria)
             .Include(r => r.Ingredientes)
+            .AsNoTracking()
             .ToList()
         };
         return View(home);
