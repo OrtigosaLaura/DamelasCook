@@ -7,7 +7,7 @@ namespace DamelasCook.Services;
     {
         public async Task SendEmailAsync(string emailAddress, string subject, string htmlMessage)
         {
-            var mail = "gcook.app@outlook.com";
+            var mail = "damelascook.app@outlook.com";
             var pw = "QV3E4khpZBEcL7K";
 
             var client = new SmtpClient("smtp-mail.outlook.com", 587)
