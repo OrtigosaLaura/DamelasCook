@@ -18,4 +18,8 @@ pacotes
 Microsoft.VisualStudio.Web.CodeGeneration.Design
 
 Gerar Controller e Views de CRUD:
-dotnet-aspnet-codegenerator controller -name CategoriasController -m Categoria -dc AppDbContext -l "~/Views/Shared/_LayoutAdmin.cshtml" -outDir Controllers
+dotnet-aspnet-codegenerator controller -name ReceitasController -m Receita -dc AppDbContext -l "~/Views/Shared/_LayoutAdmin.cshtml" -outDir Controllers
+
+alterar a view receita/index
+alterar a view receita/CategoriasController
+alterar receitascontroller
